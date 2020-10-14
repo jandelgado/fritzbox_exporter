@@ -61,6 +61,20 @@ Usage:
     The password (needed for metrics from TR-064 API) can be passed over environment variables to test in shell:
     read -rs PASSWORD && export PASSWORD && ./fritzbox_exporter -username <user> -test; unset PASSWORD
 
+### Using the docker image
+
+The image is configured using environment variables:
+
+* `GATEWAYURL`
+* `USER` 
+* `LISTEN_ADDRESS` 
+* `PASSWORD`
+
+```
+$ docker build -t fritzbox_exporter .
+$ docker run -e GATEWAYURL="https://fritz.box:49000" -p9133:9133 fritzbox_exporter
+```
+
 ## Exported metrics
 
 start exporter and run
