@@ -16,5 +16,6 @@ ENV GATEWAYURL="https://fritz.box:49000"
 ENV LISTENURL="0.0.0.0:9133"
 ENV USERNAME=""
 
-ENTRYPOINT exec ./main -gateway-url $GATEWAYURL -listen-address $LISTENURL -username $USERNAME 
+ENTRYPOINT exec ./main -gateway-url $GATEWAYURL -listen-address $LISTENURL -username $USERNAME  -metrics=/app/metrics.json
+
 
