@@ -28,6 +28,7 @@ import (
 	"strings"
 	"sync"
 	"time"
+	"crypto/tls"
 
 	"github.com/namsral/flag"
 	"github.com/prometheus/client_golang/prometheus"
@@ -57,6 +58,7 @@ var (
 	flagGatewayLuaURL = flag.String("gateway-luaurl", "http://fritz.box", "The URL of the FRITZ!Box UI")
 	flagUsername      = flag.String("username", "", "The user for the FRITZ!Box UPnP service")
 	flagPassword      = flag.String("password", "", "The password for the FRITZ!Box UPnP service")
+	flagInsecureTLS = flag.Bool("insecure", false, "Disable TLS certificate checks")
 )
 
 var (
@@ -663,6 +665,8 @@ func getValueType(vt string) prometheus.ValueType {
 
 func main() {
 	flag.Parse()
+
+	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: *flagInsecureTLS}
 
 	u, err := url.Parse(*flagGatewayURL)
 	if err != nil {
