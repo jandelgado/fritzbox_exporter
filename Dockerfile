@@ -29,4 +29,3 @@ ENTRYPOINT exec ./main \
                 -metrics-file=/app/metrics.json \
                 -lua-metrics-file=/app/metrics-lua.json \
                 $OPTS
-
